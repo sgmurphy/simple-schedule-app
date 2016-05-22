@@ -1,0 +1,16 @@
+<h1><span class="glyphicon glyphicon-user" aria-hidden="true"></span> People</h1>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+      </tr>
+    </thead>
+    <tbody>
+    {{#each model as |person|}}
+      <tr><td>{{person.name}}</td></tr>
+    {{/each}}
+    </tbody>
+</table>
+
+{{outlet}}

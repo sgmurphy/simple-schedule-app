@@ -1,0 +1,28 @@
+<h1><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Settings</h1>
+
+<h2>Meeting Dates</h2>
+<form>
+  <div class="form-group">
+    <label>Midweek meeting is on</label>
+    <select class="form-control">
+      {{#each-in ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'] as |day|}}
+        {{debugger}}
+      {{/each-in}}
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Weekend meeting is on</label>
+    <select class="form-control">
+      <option>Monday</option>
+      <option>Tuesday</option>
+      <option>Wednesday</option>
+      <option>Thursday</option>
+      <option>Friday</option>
+      <option>Saturday</option>
+      <option>Sunday</option>
+    </select>
+  </div>
+</form>
+
+{{outlet}}

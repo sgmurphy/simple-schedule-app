@@ -1,0 +1,6 @@
+body {
+  padding-top: 70px;
+}
+h1 .glyphicon, h1 button {
+  vertical-align: bottom;
+}
