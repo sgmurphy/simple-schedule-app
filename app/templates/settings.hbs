@@ -4,8 +4,8 @@
 <form>
   <div class="form-group">
     <label>Midweek meeting is on</label>
-    <select class="form-control">
-      {{#each week-days as |day index|}}
+    <select class="form-control" onchange={{action "changeMidweekMeeting" value="target.value"}}>
+      {{#each weekdays as |day index|}}
         <option value="{{day}}" selected="{{if (eq model.midweek_meeting day) 'selected'}}">{{day}}</option>
       {{/each}}
     </select>
@@ -13,8 +13,8 @@
 
   <div class="form-group">
     <label>Weekend meeting is on</label>
-    <select class="form-control">
-      {{#each week-days as |day index|}}
+    <select class="form-control" onchange={{action "changeWeekendMeeting" value="target.value"}}>
+      {{#each weekdays as |day index|}}
         <option value="{{day}}" selected="{{if (eq model.weekend_meeting day) 'selected'}}">{{day}}</option>
       {{/each}}
     </select>

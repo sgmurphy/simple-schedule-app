@@ -1,12 +1,15 @@
 import Ember from 'ember';
 
-var settings = {
-  midweek_meeting: 'Wednesday',
-  weekend_meeting: 'Saturday'
-};
-
 export default Ember.Route.extend({
   model() {
-    return settings;
+    var store = this.store;
+
+    return this.store.findAll('settings').then(function(results) {
+      if (results.get('length')) {
+        return results.get('firstObject');
+      }
+
+      return store.createRecord('settings', {});
+    });
   }
 });
