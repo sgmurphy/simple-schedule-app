@@ -24,7 +24,7 @@ You will need the following things properly installed on your computer.
 
 * `ember server`
 * Visit your app at [http://localhost:4200](http://localhost:4200).
-* to run using Electron as stand alone app `ember electron`
+* `ember electron` to run using Electron as stand alone app
 
 ### Code Generators
 
@@ -39,7 +39,7 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 * `ember build` (development)
 * `ember build --environment production` (production)
-* to build Electron binaries run `ember electron:package` or `emeber electron:package --platform darwin` to only build an OSX package
+* `ember electron:package` to build Electron binaries or `ember electron:package --platform darwin` to only build an OSX package
 
 ### Deploying
 
