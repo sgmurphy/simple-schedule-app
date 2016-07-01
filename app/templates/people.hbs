@@ -1,16 +1,29 @@
-<h1><span class="glyphicon glyphicon-user" aria-hidden="true"></span> People</h1>
+<h1>
+  <span class="glyphicon glyphicon-user" aria-hidden="true"></span> People
+  <button type="button" class="btn btn-primary pull-right">Add Person</button>
+</h1>
 
-<table class="table">
+{{#if model}}
+<table class="table table-hover">
     <thead>
       <tr>
         <th>Name</th>
+        <th>Assignments</th>
+        <th>Assignment Frequency</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
     {{#each model as |person|}}
-      <tr><td>{{person.name}}</td></tr>
+      <tr>
+        <td>{{person.name}}</td>
+        <td></td>
+        <td>{{person.assignmentFrequency}} weeks</td>
+        <td class="text-right"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></td>
+      </tr>
     {{/each}}
     </tbody>
 </table>
+{{/if}}
 
 {{outlet}}
