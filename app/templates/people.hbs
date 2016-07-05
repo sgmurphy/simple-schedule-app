@@ -8,7 +8,7 @@
     <thead>
       <tr>
         <th>Name</th>
-        <th>Assignments</th>
+        <th>Groups</th>
         <th>Assignment Frequency</th>
         <th></th>
       </tr>
@@ -17,7 +17,11 @@
     {{#each model as |person|}}
       <tr>
         <td>{{person.name}}</td>
-        <td></td>
+        <td>
+          <span class="label label-default">Sound</span>
+          <span class="label label-default">Stage</span>
+          <span class="label label-default">Microphones</span>
+        </td>
         <td>{{person.assignmentFrequency}} weeks</td>
         <td class="text-right"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></td>
       </tr>

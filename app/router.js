@@ -6,9 +6,11 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route('settings');
   this.route('people');
   this.route('person', { path: '/person/:person_id' });
+  this.route('groups');
+  this.route('group', { path: '/group/:group_id' });
+  this.route('settings');
 });
 
 export default Router;
