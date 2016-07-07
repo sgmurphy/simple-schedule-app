@@ -4,10 +4,10 @@
 
 <form>
   <div class="form-group">
-    <label>Name</label>
-    {{input type="text" value=model.name}}
+    <label for="name">Name</label>
+    {{input type="text" class="form-control" id="name" value=model.name}}
   </div>
-  <button {{action "save"}} type="submit" class="btn btn-primary">Add</button>
+  <button {{action "save"}} type="submit" class="btn btn-primary">Save</button>
 </form>
 
 {{outlet}}
