@@ -5,10 +5,11 @@ export default Ember.Controller.extend({
   actions: {
     changeMidweekMeeting(day) {
       this.model.set('midweek_meeting', day);
-      this.model.save();
     },
     changeWeekendMeeting(day) {
       this.model.set('weekend_meeting', day);
+    },
+    save() {
       this.model.save();
     }
   }
