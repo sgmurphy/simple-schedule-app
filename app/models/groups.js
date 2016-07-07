@@ -4,8 +4,5 @@ import { hasMany } from 'ember-data/relationships';
 
 export default Model.extend({
   name: attr('string'),
-  groups: hasMany('groups'),
-  assignmentFrequency: attr('number'),
-  lastAssignment: attr('date')
-  //datesUnavailable: attr()
+  members: hasMany('people')
 });
