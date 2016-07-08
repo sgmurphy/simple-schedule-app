@@ -22,6 +22,15 @@
     <script src="assets/the-scheduler.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
+    <script>
+    //fixes mobile menu closing after clicking link
+    $(document).on('click','.navbar-collapse.in',function(e) {
+    if( $(e.target).is('a') ) {
+        $(this).collapse('hide');
+    }
+});
+</script>
+
     {{content-for "body-footer"}}
   </body>
 </html>
