@@ -4,3 +4,6 @@ body {
 h1 .glyphicon, h1 button {
   vertical-align: bottom;
 }
+.table-hover tbody tr {
+  cursor: pointer;
+}
