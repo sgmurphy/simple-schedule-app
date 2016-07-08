@@ -5,6 +5,9 @@ export default Ember.Controller.extend({
     save() {
       this.model.save();
       this.transitionToRoute('people');
+    },
+    cancel() {
+      window.history.back();
     }
   }
 });

@@ -11,6 +11,9 @@ export default Ember.Controller.extend({
     },
     save() {
       this.model.save();
+    },
+    cancel() {
+      window.history.back();
     }
   }
 });
