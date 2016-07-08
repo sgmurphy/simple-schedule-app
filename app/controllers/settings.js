@@ -4,10 +4,10 @@ export default Ember.Controller.extend({
   weekdays: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
   actions: {
     changeMidweekMeeting(day) {
-      this.model.set('midweek_meeting', day);
+      this.model.set('midweekMeeting', day);
     },
     changeWeekendMeeting(day) {
-      this.model.set('weekend_meeting', day);
+      this.model.set('weekendMeeting', day);
     },
     save() {
       this.model.save();
