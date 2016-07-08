@@ -17,7 +17,7 @@
       {{#link-to "group" group tagName="tr"}}
         <td>{{group.name}}</td>
         <td>[count]</td>
-        <td class="text-right"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></td>
+        <td class="text-right"><a {{action "delete" group}} class="glyphicon glyphicon-trash" aria-hidden="true"></a></td>
       {{/link-to}}
     {{/each}}
     </tbody>

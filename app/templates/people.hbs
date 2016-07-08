@@ -1,6 +1,6 @@
 <h1>
   <span class="glyphicon glyphicon-user" aria-hidden="true"></span> People
-  <button type="button" class="btn btn-primary pull-right">Add Person</button>
+  {{#link-to "person" "new" class="btn btn-primary pull-right"}}Add Person{{/link-to}}
 </h1>
 
 {{#if model}}
@@ -23,7 +23,7 @@
           <span class="label label-default">Microphones</span>
         </td>
         <td>{{person.assignmentFrequency}} weeks</td>
-        <td class="text-right"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></td>
+        <td class="text-right"><a {{action "delete" person}} class="glyphicon glyphicon-trash" aria-hidden="true"></a></td>
       </tr>
     {{/each}}
     </tbody>
