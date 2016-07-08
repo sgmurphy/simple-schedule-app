@@ -15,7 +15,7 @@
     </thead>
     <tbody>
     {{#each model as |person|}}
-      <tr>
+      {{#link-to "person" person tagName="tr"}}
         <td>{{person.name}}</td>
         <td>
           <span class="label label-default">Sound</span>
@@ -24,7 +24,7 @@
         </td>
         <td>{{person.assignmentFrequency}} weeks</td>
         <td class="text-right"><a {{action "delete" person}} class="glyphicon glyphicon-trash" aria-hidden="true"></a></td>
-      </tr>
+      {{/link-to}}
     {{/each}}
     </tbody>
 </table>
