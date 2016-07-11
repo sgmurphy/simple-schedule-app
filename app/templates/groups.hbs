@@ -8,7 +8,7 @@
     <thead>
       <tr>
         <th>Name</th>
-        <th>Members</th>
+        <th>People</th>
         <th></th>
       </tr>
     </thead>
@@ -16,7 +16,7 @@
     {{#each model as |group|}}
       {{#link-to "group" group tagName="tr"}}
         <td>{{group.name}}</td>
-        <td>[count]</td>
+        <td>{{group.people.length}}</td>
         <td class="text-right"><a {{action "delete" group}} class="glyphicon glyphicon-trash" aria-hidden="true"></a></td>
       {{/link-to}}
     {{/each}}

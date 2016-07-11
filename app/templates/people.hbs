@@ -8,6 +8,7 @@
     <thead>
       <tr>
         <th>Name</th>
+        <th>Email</th>
         <th>Groups</th>
         <th>Assignment Frequency</th>
         <th></th>
@@ -17,12 +18,13 @@
     {{#each model as |person|}}
       {{#link-to "person" person tagName="tr"}}
         <td>{{person.name}}</td>
+        <td><a href="mailto:{{person.email}}">{{person.email}}</a></td>
         <td>
-          <span class="label label-default">Sound</span>
-          <span class="label label-default">Stage</span>
-          <span class="label label-default">Microphones</span>
+          {{#each person.groups as |group|}}
+            <span class="label label-default">{{group.name}}</span>
+          {{/each}}
         </td>
-        <td>{{person.assignmentFrequency}} weeks</td>
+        <td>{{person.assignmentFrequencyPrintable}}</td>
         <td class="text-right"><a {{action "delete" person}} class="glyphicon glyphicon-trash" aria-hidden="true"></a></td>
       {{/link-to}}
     {{/each}}
