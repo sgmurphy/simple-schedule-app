@@ -1,1 +1,18 @@
+<h1>
+  <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Generate Schedule
+</h1>
+
+<form>
+  <div class="form-group">
+    <label for="name">Start date</label>
+    <input type="date" class="form-control" id="start-date">
+    <label for="name">End date</label>
+    <input type="date" class="form-control" id="end-date">
+  </div>
+  <div class="form-group">
+    <button {{action "save"}} type="submit" class="btn btn-primary">Save</button>
+    <button {{action "cancel"}} type="button" class="btn btn-link">Cancel</button>
+  </div>
+</form>
+
 {{outlet}}
