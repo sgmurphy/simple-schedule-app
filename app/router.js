@@ -11,6 +11,7 @@ Router.map(function() {
   this.route('groups');
   this.route('group', { path: '/groups/:group_id' });
   this.route('settings');
+  this.route('schedule', { path: '/new' });
 });
 
 export default Router;
