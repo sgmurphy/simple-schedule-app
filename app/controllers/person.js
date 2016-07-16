@@ -6,8 +6,8 @@ export default Ember.Controller.extend({
     changeGroups(element) {
       var controller = this;
       var groups = [];
-      $(":selected", element).each(function() {
-        groups.push(controller.store.peekRecord('group', $(this).val()));
+      Ember.$(":selected", element).each(function() {
+        groups.push(controller.store.peekRecord('group', Ember.$(this).val()));
       });
 
       this.model.set('groups', groups);
