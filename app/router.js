@@ -8,7 +8,9 @@ const Router = Ember.Router.extend({
 Router.map(function() {
   this.route('people');
   this.route('person', { path: '/people/:person_id' });
-  this.route('groups');
+  this.route('groups', function() {
+    this.route('new')
+  });
   this.route('group', { path: '/groups/:group_id' });
   this.route('settings');
   this.route('schedule', { path: '/new' });
