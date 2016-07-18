@@ -1,6 +1,6 @@
 <h1>
   <span class="glyphicon glyphicon-tag" aria-hidden="true"></span> Groups
-  {{#link-to "group" "new" class="btn btn-primary pull-right"}}Add Group{{/link-to}}
+  {{#link-to "groups.edit" "new" class="btn btn-primary pull-right"}}Add Group{{/link-to}}
 </h1>
 
 {{#if model}}
@@ -14,7 +14,7 @@
     </thead>
     <tbody>
     {{#each model as |group|}}
-      {{#link-to "group" group tagName="tr"}}
+      {{#link-to "groups.edit" group tagName="tr"}}
         <td>{{group.name}}</td>
         <td>{{group.people.length}}</td>
         <td class="text-right"><a {{action "delete" group}} class="glyphicon glyphicon-trash" aria-hidden="true"></a></td>

@@ -6,12 +6,17 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route('people');
-  this.route('person', { path: '/people/:person_id' });
-  this.route('groups');
-  this.route('group', { path: '/groups/:group_id' });
+  this.route('schedules', function() {
+    this.route('new', { path: '/new' });
+    //this.route('edit', { path: '/:schedule_id' });
+  });
+  this.route('people', function() {
+    this.route('edit', { path: '/:person_id' });
+  });
+  this.route('groups', function() {
+    this.route('edit', { path: '/:group_id' });
+  });
   this.route('settings');
-  this.route('schedule', { path: '/new' });
 });
 
 export default Router;

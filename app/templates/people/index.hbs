@@ -1,6 +1,6 @@
 <h1>
   <span class="glyphicon glyphicon-user" aria-hidden="true"></span> People
-  {{#link-to "person" "new" class="btn btn-primary pull-right"}}Add Person{{/link-to}}
+  {{#link-to "people.edit" "new" class="btn btn-primary pull-right"}}Add Person{{/link-to}}
 </h1>
 
 {{#if model}}
@@ -16,7 +16,7 @@
     </thead>
     <tbody>
     {{#each model as |person|}}
-      {{#link-to "person" person tagName="tr"}}
+      {{#link-to "people.edit" person tagName="tr"}}
         <td>{{person.name}}</td>
         <td><a href="mailto:{{person.email}}">{{person.email}}</a></td>
         <td>
