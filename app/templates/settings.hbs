@@ -6,7 +6,7 @@
     <label for="midweek-meeting">Midweek meeting is on</label>
     <select class="form-control" id="midweek-meeting" onchange={{action "changeMidweekMeeting" value="target.value"}}>
       {{#each weekdays as |day index|}}
-        <option value="{{day}}" selected="{{if (eq model.midweekMeeting day) 'selected'}}">{{day}}</option>
+        <option value="{{index}}" selected="{{if (eq model.midweekMeeting index) 'selected'}}">{{day}}</option>
       {{/each}}
     </select>
   </div>
@@ -15,7 +15,7 @@
     <label for="weekend-meeting">Weekend meeting is on</label>
     <select class="form-control" id="weekend-meeting" onchange={{action "changeWeekendMeeting" value="target.value"}}>
       {{#each weekdays as |day index|}}
-        <option value="{{day}}" selected="{{if (eq model.weekendMeeting day) 'selected'}}">{{day}}</option>
+        <option value="{{index}}" selected="{{if (eq model.weekendMeeting index) 'selected'}}">{{day}}</option>
       {{/each}}
     </select>
   </div>

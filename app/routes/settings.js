@@ -9,10 +9,7 @@ export default Ember.Route.extend({
         return results.get('firstObject');
       }
 
-      return store.createRecord('setting', {
-        midweekMeeting: "Wednesday",
-        weekendMeeting: "Sunday"
-      }).save();
+      return store.createRecord('setting').save();
     });
   }
 });
