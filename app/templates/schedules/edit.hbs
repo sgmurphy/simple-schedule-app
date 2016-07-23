@@ -1,0 +1,31 @@
+<h1>
+  <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> {{model.name}}
+  <button class="btn btn-primary pull-right">Print</button>
+</h1>
+
+{{#if model.dates.length}}
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Sound</th>
+        <th>Stage</th>
+        <th>Left Mic</th>
+        <th>Right Mic</th>
+      </tr>
+    </thead>
+    <tbody>
+    {{#each model.dates as |date|}}
+      <tr>
+        <td>{{moment-format date.date 'ddd l'}}</td>
+        <td>Joe Shmoe</td>
+        <td>John Smith</td>
+        <td>David White</td>
+        <td>Rodger That</td>
+      </tr>
+    {{/each}}
+    </tbody>
+</table>
+{{/if}}
+
+{{outlet}}

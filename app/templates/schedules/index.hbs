@@ -4,15 +4,28 @@
 </h1>
 
 {{#if model}}
-<table class="table">
+<table class="table table-hover">
     <thead>
       <tr>
-        <th>Date</th>
+        <th>Name</th>
+        <th>Dates</th>
+        <th>Assignments</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
-    {{#each model as |date|}}
-      <tr><td>{{date.date}}</td></tr>
+    {{#each model as |schedule|}}
+      {{#link-to "schedules.edit" schedule tagName="tr"}}
+        <td>{{schedule.name}}</td>
+        <td>{{moment-format schedule.startDate 'l'}} - {{moment-format schedule.endDate 'l'}}</td>
+        <td>
+          <span class="label label-default">Sound</span>
+          <span class="label label-default">Stage</span>
+          <span class="label label-default">Left Mic</span>
+          <span class="label label-default">Right Mic</span>
+        </td>
+        <td class="text-right"><a {{action 'delete' schedule}} class="glyphicon glyphicon-trash" aria-hidden="true"></a></td>
+      {{/link-to}}
     {{/each}}
     </tbody>
 </table>
