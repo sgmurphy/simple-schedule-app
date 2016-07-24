@@ -10,9 +10,9 @@ export default Ember.Route.extend({
     this.store.findAll('setting').then(function(results) {
       if (results.get('length')) {
         self.set('settings', results.get('firstObject'));
+      } else {
+        self.set('settings', self.store.createRecord('setting').save());
       }
-
-      self.set('settings', self.store.createRecord('setting').save());
     });
   },
   setupController(controller, model) {
