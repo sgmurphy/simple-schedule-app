@@ -1,6 +1,6 @@
 <h1>
   <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> {{model.name}}
-  <button class="btn btn-primary pull-right">Print</button>
+  <button class="btn btn-primary pull-right print" {{action 'print'}} onclick="this.blur();">Print</button>
 </h1>
 
 {{#if model.dates.length}}
@@ -17,7 +17,7 @@
     <tbody>
     {{#each model.dates as |date|}}
       <tr>
-        <td>{{moment-format date.date 'ddd l'}}</td>
+        <td>{{moment-format date.date 'ddd ll'}}</td>
         <td>Joe Shmoe</td>
         <td>John Smith</td>
         <td>David White</td>
