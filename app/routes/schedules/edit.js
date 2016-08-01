@@ -10,6 +10,10 @@ export default Ember.Route.extend({
   },
   afterModel() {
     var self = this;
+    this.store.findAll('person').then(function(result) {
+      self.set('people', result);
+    });
+
     this.store.findAll('group').then(function(result) {
       self.set('groups', result);
     });
@@ -24,6 +28,7 @@ export default Ember.Route.extend({
   },
   setupController(controller, model) {
     this._super(controller, model);
+    controller.set('people', this.get('people'));
     controller.set('groups', this.get('groups'));
     controller.set('settings', this.get('settings'));
   }

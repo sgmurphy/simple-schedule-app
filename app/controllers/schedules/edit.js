@@ -11,14 +11,19 @@ export default Ember.Controller.extend({
       this.transitionToRoute('schedules.view', this.model);
     },
     saveAndRebuild() {
+      var controller = this;
+
       // Delete current dates first
       this.model.get('dates').invoke('destroyRecord');
 
-      this.generateDates();
-      this.generateAssignments();
+      // TODO: There might be a cleaner way to do this
+      this.model.save().then(function() {
+        controller.generateDates();
+        controller.generateAssignments();
 
-      this.model.save();
-      this.transitionToRoute('schedules.view', this.model);
+        controller.model.save();
+        controller.transitionToRoute('schedules.view', controller.model);
+      });
     },
     cancel() {
       window.history.back();
@@ -44,17 +49,34 @@ export default Ember.Controller.extend({
   generateAssignments() {
     var controller = this;
 
+    // TODO: Fix this hack. Resets lastAssignment dates for everyone so rebuilding
+    // schedules will work.
+    controller.store.findAll('person').then(function(people) {
+      people.forEach(function(person) {
+        person.set('lastAssignment', null);
+        person.save();
+      });
+    });
+
     // Loop thru schedule dates
     controller.model.get('dates').forEach(function(date) {
       // Loop thru available assignments (schedule columns)
-      controller.model.get('assignments').forEach(function(availableAssignment) {
+      controller.model.get('assignments').forEach(function(availableAssignment, index, availableAssignments) {
         var group = controller.get('store').peekRecord('group', availableAssignment.group);
 
         // Find a person in the group that is available
-        var person = group.get('people').sortBy('lastAssignment').find(function(person) {
+        var person = group.get('people').sortBy('lastAssignment', 'sequence').find(function(person) {
           // Check if the person is available
+
+          // Do they already have an assignment on this date?
+          if (moment(person.get('lastAssignment')).isSame(date.get('date'))) {
+            console.log(person.get('name') + ' already has an assignment on ' + date.get('date'));
+            return false;
+          }
           return true;
         });
+
+        console.log(date.get('date'), group.get('name'), person.get('name'));
 
         // Create assignment
         controller.get('store').createRecord('assignment', {
@@ -63,9 +85,13 @@ export default Ember.Controller.extend({
           person: person
         }).save();
 
+        date.save();
+        group.save()
+
         if (person) {
-          //person.set('lastAssignment', date.date);
-          //person.save();
+          person.set('lastAssignment', date.get('date'));
+          person.set('sequence', availableAssignments.get('length') - index);
+          person.save();
         }
       });
     });
