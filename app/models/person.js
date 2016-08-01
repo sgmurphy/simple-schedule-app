@@ -8,7 +8,7 @@ export default Model.extend({
   email: attr('string'),
   groups: hasMany('group'),
   assignmentFrequency: attr('number'),
-  lastAssignment: attr('date'),
+  lastAssignment: attr(),
   //datesUnavailable: attr()
   assignmentFrequencyPrintable: Ember.computed('assignmentFrequency', function() {
     if (this.get('assignmentFrequency') === 0) {

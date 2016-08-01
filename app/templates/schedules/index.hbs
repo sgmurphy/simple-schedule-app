@@ -1,33 +1,34 @@
-<h1>
-  <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Schedules
-  {{#link-to "schedules.new" class="btn btn-primary pull-right"}}Add Schedule{{/link-to}}
-</h1>
+<div class="page-header">
+  <h1>
+    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Schedules
+    {{#link-to "schedules.edit" "new" class="btn btn-primary pull-right"}}Add Schedule{{/link-to}}
+  </h1>
+</div>
 
 {{#if model}}
 <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Dates</th>
-        <th>Assignments</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-    {{#each model as |schedule|}}
-      {{#link-to "schedules.edit" schedule tagName="tr"}}
-        <td>{{schedule.name}}</td>
-        <td>{{moment-format schedule.startDate 'l'}} - {{moment-format schedule.endDate 'l'}}</td>
-        <td>
-          <span class="label label-default">Sound</span>
-          <span class="label label-default">Stage</span>
-          <span class="label label-default">Left Mic</span>
-          <span class="label label-default">Right Mic</span>
-        </td>
-        <td class="text-right"><a {{action 'delete' schedule}} class="glyphicon glyphicon-trash" aria-hidden="true"></a></td>
-      {{/link-to}}
-    {{/each}}
-    </tbody>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Dates</th>
+      <th>Assignments</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  {{#each model as |schedule|}}
+    {{#link-to "schedules.view" schedule tagName="tr"}}
+      <td>{{schedule.name}}</td>
+      <td>{{moment-format schedule.startDate 'l'}} - {{moment-format schedule.endDate 'l'}}</td>
+      <td>
+      {{#each schedule.assignments as |assignment|}}
+        <span class="label label-default">{{assignment.name}}</span>
+      {{/each}}
+      </td>
+      <td class="text-right"><a {{action 'delete' schedule}} class="glyphicon glyphicon-trash" aria-hidden="true"></a></td>
+    {{/link-to}}
+  {{/each}}
+  </tbody>
 </table>
 {{/if}}
 

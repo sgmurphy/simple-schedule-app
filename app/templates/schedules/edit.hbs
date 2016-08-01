@@ -1,31 +1,58 @@
-<h1>
-  <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> {{model.name}}
-  <button class="btn btn-primary pull-right print" {{action 'print'}} onclick="this.blur();">Print</button>
-</h1>
+<div class="page-header">
+  <h1>
+    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> {{if model.isNew 'Add' 'Edit'}} Schedule
+  </h1>
+</div>
 
-{{#if model.dates.length}}
-<table class="table table-hover">
-    <thead>
-      <tr>
-        <th>Date</th>
-        <th>Sound</th>
-        <th>Stage</th>
-        <th>Left Mic</th>
-        <th>Right Mic</th>
-      </tr>
-    </thead>
-    <tbody>
-    {{#each model.dates as |date|}}
-      <tr>
-        <td>{{moment-format date.date 'ddd ll'}}</td>
-        <td>Joe Shmoe</td>
-        <td>John Smith</td>
-        <td>David White</td>
-        <td>Rodger That</td>
-      </tr>
-    {{/each}}
-    </tbody>
-</table>
-{{/if}}
+<form>
+  <div class="row">
+    <div class="form-group col-md-12">
+      <label for="name">Name</label>
+      {{input type="text" class="form-control" id="name" value=model.name}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-md-6">
+      <label for="start-date">Start date</label>
+      {{input type="date" class="form-control" id="start-date" value=model.startDate}}
+    </div>
+    <div class="form-group col-md-6">
+      <label for="end-date">End date</label>
+      {{input type="date" class="form-control" id="end-date" value=model.endDate}}
+    </div>
+  </div>
+  <h2>Columns</h2>
+  {{#each model.assignments as |assignment|}}
+  <div class="row">
+    <div class="form-group col-md-6">
+      {{input type="text" class="form-control" value=assignment.name}}
+    </div>
+    <div class="form-group col-md-6">
+      {{#x-select class="form-control" value=assignment.group as |xs|}}
+      {{#each groups as |group|}}
+        {{#xs.option value=group.id}}{{group.name}}{{/xs.option}}
+      {{/each}}
+      {{/x-select}}
+      <!-- <a class="glyphicon glyphicon-trash" aria-hidden="true"></a> -->
+    </div>
+  </div>
+  {{/each}}
+  <div class="row">
+    <div class="form-group col-md-12">
+      <button {{action "addAssignment"}} type="submit" class="btn btn-xs btn-primary">Add Assignment</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-md-12">
+      {{#if model.isNew}}
+        <button {{action "saveAndRebuild"}} type="submit" class="btn btn-primary">Save</button>
+      {{else}}
+        <button {{action "save"}} type="submit" class="btn btn-primary">Save</button>
+        <button {{action "saveAndRebuild"}} type="submit" class="btn btn-default">Save &amp; Rebuild</button>
+      {{/if}}
+      <button {{action "cancel"}} type="button" class="btn btn-link">Cancel</button>
+    </div>
+  </div>
+</form>
 
 {{outlet}}

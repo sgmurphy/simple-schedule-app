@@ -1,5 +1,5 @@
 body {
-  padding-top: 70px;
+  padding-top: 50px;
 }
 h1 .glyphicon, h1 button {
   vertical-align: bottom;
@@ -12,9 +12,5 @@ h1 .glyphicon, h1 button {
 @media print {
   body {
     padding-top: 0;
-  }
-
-  .btn.print {
-    display: none;
   }
 }
