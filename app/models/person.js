@@ -10,7 +10,7 @@ export default Model.extend({
   assignmentFrequency: attr('number'),
   lastAssignment: attr(),
   sequence: attr(), // used to randomize schedules
-  //datesUnavailable: attr()
+  datesUnavailable: attr({ defaultValue() { return []; } }),
   assignmentFrequencyPrintable: Ember.computed('assignmentFrequency', function() {
     if (this.get('assignmentFrequency') === 0) {
       return 'As needed';

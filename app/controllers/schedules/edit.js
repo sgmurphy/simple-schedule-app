@@ -64,16 +64,31 @@ export default Ember.Controller.extend({
       controller.model.get('assignments').forEach(function(availableAssignment, index, availableAssignments) {
         var group = controller.get('store').peekRecord('group', availableAssignment.group);
 
+        //console.log(group.get('people').map(function(person) { return person.get('name'); }));
+        //console.log(group.get('people').map(function(person) { return person.get('assignmentCount'); }));
+        //console.log(group.get('people').map(function(person) { return person.get('lastAssignment'); }));
+
         // Find a person in the group that is available
         var person = group.get('people').sortBy('lastAssignment', 'sequence').find(function(person) {
-          // Check if the person is available
-
           // Do they already have an assignment on this date?
           if (moment(person.get('lastAssignment')).isSame(date.get('date'))) {
-            console.log(person.get('name') + ' already has an assignment on ' + date.get('date'));
             return false;
           }
-          return true;
+
+          // Has enough time passed since their last assignment?
+          if (moment(date.get('date')).isBefore(moment(person.get('lastAssignment')).add(person.get('assignmentFrequency'), 'weeks'))) {
+            return false;
+          }
+
+          // Check if the person is unavailable
+          var unavailable = person.get('datesUnavailable').any(function(item, index, enumerable) {
+            if (moment(item.date).isSame(date.get('date'))) {
+              return true;
+            }
+            return false;
+          });
+
+          return !unavailable;
         });
 
         console.log(date.get('date'), group.get('name'), person.get('name'));
