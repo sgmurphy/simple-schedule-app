@@ -54,18 +54,30 @@ export default Ember.Controller.extend({
     controller.store.findAll('person').then(function(people) {
       people.forEach(function(person) {
         person.set('lastAssignment', null);
+        person.set('assignmentCount', 0)
         person.save();
       });
     });
-
+    // Sort availableAssignment by group size
+    var groupsSorted = controller.model.get('assignments').toArray().sort(function(a, b) {
+      var groupA = controller.get('groups').findBy('id', a.group).get('people').get('length');
+      var groupB = controller.get('groups').findBy('id', b.group).get('people').get('length');
+      return groupA - groupB;
+    });
+    //Log groupsSorted to console
+    console.log(groupsSorted.map(function(group) {
+        return group.name;
+    }));
     // Loop thru schedule dates
     controller.model.get('dates').forEach(function(date) {
       // Loop thru available assignments (schedule columns)
-      controller.model.get('assignments').forEach(function(availableAssignment, index, availableAssignments) {
+      groupsSorted.forEach(function(availableAssignment, index, availableAssignments) {
         var group = controller.get('store').peekRecord('group', availableAssignment.group);
-
+        console.log(group.get('people').sortBy('assignmentCount', 'lastAssignment').map(function(person) { return person.get('name'); }));
+        console.log(group.get('people').sortBy('assignmentCount', 'lastAssignment').map(function(person) { return person.get('assignmentCount'); }));
+        console.log(group.get('people').sortBy('assignmentCount', 'lastAssignment').map(function(person) { return person.get('lastAssignment'); }));
         // Find a person in the group that is available
-        var person = group.get('people').sortBy('lastAssignment', 'sequence').find(function(person) {
+        var person = group.get('people').sortBy('assignmentCount', 'lastAssignment').find(function(person) {
           // Check if the person is available
 
           // Do they already have an assignment on this date?
@@ -90,7 +102,7 @@ export default Ember.Controller.extend({
 
         if (person) {
           person.set('lastAssignment', date.get('date'));
-          person.set('sequence', availableAssignments.get('length') - index);
+          person.incrementProperty('assignmentCount');
           person.save();
         }
       });
