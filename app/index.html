@@ -9,7 +9,6 @@
 
     {{content-for "head"}}
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/vendor.css">
     <link rel="stylesheet" href="assets/the-scheduler.css">
 
@@ -20,16 +19,15 @@
 
     <script src="assets/vendor.js"></script>
     <script src="assets/the-scheduler.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
     <script>
     //fixes mobile menu closing after clicking link
     $(document).on('click','.navbar-collapse.in',function(e) {
-    if( $(e.target).is('a') ) {
+      if( $(e.target).is('a') ) {
         $(this).collapse('hide');
-    }
-});
-</script>
+      }
+    });
+    </script>
 
     {{content-for "body-footer"}}
   </body>
