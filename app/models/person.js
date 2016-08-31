@@ -9,8 +9,11 @@ export default Model.extend({
   groups: hasMany('group'),
   assignmentFrequency: attr('number'),
   lastAssignment: attr(),
-  sequence: attr(), // used to randomize schedules
+  assignmentCount: attr('number'), // used to even out schedules
   datesUnavailable: attr({ defaultValue() { return []; } }),
+  randomSeed: Ember.computed(function() {
+    return Math.random();
+  }).volatile(),
   assignmentFrequencyPrintable: Ember.computed('assignmentFrequency', function() {
     if (this.get('assignmentFrequency') === 0) {
       return 'As needed';

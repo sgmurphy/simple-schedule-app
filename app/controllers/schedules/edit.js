@@ -54,6 +54,7 @@ export default Ember.Controller.extend({
     controller.store.findAll('person').then(function(people) {
       people.forEach(function(person) {
         person.set('lastAssignment', null);
+        person.set('assignmentCount', 0);
         person.save();
       });
     });
@@ -64,12 +65,12 @@ export default Ember.Controller.extend({
       controller.model.get('assignments').forEach(function(availableAssignment, index, availableAssignments) {
         var group = controller.get('store').peekRecord('group', availableAssignment.group);
 
-        //console.log(group.get('people').map(function(person) { return person.get('name'); }));
-        //console.log(group.get('people').map(function(person) { return person.get('assignmentCount'); }));
-        //console.log(group.get('people').map(function(person) { return person.get('lastAssignment'); }));
+        var sortedPeople = group.get('people').sortBy('randomSeed').sortBy('lastAssignment', 'assignmentCount');
+
+        console.log(sortedPeople.map(function(person) { return `${person.get('name')}:${person.get('assignmentCount')}`; }));
 
         // Find a person in the group that is available
-        var person = group.get('people').sortBy('lastAssignment', 'sequence').find(function(person) {
+        var person = sortedPeople.find(function(person) {
           // Do they already have an assignment on this date?
           if (moment(person.get('lastAssignment')).isSame(date.get('date'))) {
             return false;
@@ -105,7 +106,7 @@ export default Ember.Controller.extend({
 
         if (person) {
           person.set('lastAssignment', date.get('date'));
-          person.set('sequence', availableAssignments.get('length') - index);
+          person.incrementProperty('assignmentCount');
           person.save();
         }
       });
