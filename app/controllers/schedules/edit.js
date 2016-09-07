@@ -102,7 +102,7 @@ export default Ember.Controller.extend({
         }).save();
 
         date.save();
-        group.save()
+        group.save();
 
         if (person) {
           person.set('lastAssignment', date.get('date'));
