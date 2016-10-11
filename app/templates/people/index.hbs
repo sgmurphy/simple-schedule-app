@@ -22,7 +22,7 @@
         <td>{{person.name}}</td>
         <td><a href="mailto:{{person.email}}">{{person.email}}</a></td>
         <td>
-          {{#each person.groups as |group|}}
+          {{#each person.groupsSorted as |group|}}
             <span class="label label-default">{{group.name}}</span>
           {{/each}}
         </td>

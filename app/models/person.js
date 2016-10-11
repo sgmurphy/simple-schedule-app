@@ -14,6 +14,14 @@ export default Model.extend({
   randomSeed: Ember.computed(function() {
     return Math.random();
   }).volatile(),
+  groupsSorted: Ember.computed.sort('groups', function(a, b){
+    if (a.get('name') > b.get('name')) {
+      return 1;
+    } else if (a.get('name') < b.get('name')) {
+      return -1;
+    }
+    return 0;
+  }),
   assignmentFrequencyPrintable: Ember.computed('assignmentFrequency', function() {
     if (this.get('assignmentFrequency') === 0) {
       return 'As needed';
