@@ -23,7 +23,7 @@
       <tr>
         <td>{{moment-format date.date 'ddd ll'}}</td>
         {{#each date.assignments as |assignment|}}
-          <td>{{assignment.person.name}}</td>
+          <td contenteditable="true">{{assignment.person.name}}</td>
         {{/each}}
       </tr>
     {{/each}}
