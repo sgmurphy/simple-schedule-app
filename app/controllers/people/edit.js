@@ -12,6 +12,7 @@ export default Ember.Controller.extend({
     },
     save() {
       this.groups.invoke('save');
+      this.model.set('email', this.model.getWithDefault('email', '').toLowerCase());
       this.model.save();
       this.transitionToRoute('people');
     },
