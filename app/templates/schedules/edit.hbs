@@ -47,8 +47,8 @@
       {{#if model.isNew}}
         <button {{action "saveAndRebuild"}} type="submit" class="btn btn-primary">Save</button>
       {{else}}
-        <button {{action "save"}} type="submit" class="btn btn-primary">Save</button>
-        <button {{action "saveAndRebuild"}} type="submit" class="btn btn-default">Save &amp; Rebuild</button>
+        {{async-button action=(action "save") default="Save" pending="Saving..." class="btn btn-primary"}}
+        {{async-button action=(action "saveAndRebuild") default="Save & Rebuild" pending="Rebuilding..." class="btn btn-default"}}
       {{/if}}
       <button {{action "cancel"}} type="button" class="btn btn-link">Cancel</button>
     </div>

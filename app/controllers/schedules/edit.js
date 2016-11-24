@@ -7,22 +7,33 @@ export default Ember.Controller.extend({
       this.model.get('assignments').pushObject({name: null, group: null});
     },
     save() {
-      this.model.save();
-      this.transitionToRoute('schedules.view', this.model);
+      var controller = this;
+
+      return this.model.save().then(function() {
+        controller.transitionToRoute('schedules.view', controller.model);
+      });
     },
     saveAndRebuild() {
       var controller = this;
 
-      // Delete current dates first
-      this.model.get('dates').invoke('destroyRecord');
+      return new Ember.RSVP.Promise(function(resolve, reject) {
+        // Delete current dates first
+        controller.model.get('dates').invoke('destroyRecord');
 
-      // TODO: There might be a cleaner way to do this
-      this.model.save().then(function() {
-        controller.generateDates();
-        controller.generateAssignments();
+        // TODO: There might be a cleaner way to do this
+        controller.model.save().then(function() {
+          controller.generateDates();
+          controller.generateAssignments();
 
-        controller.model.save();
-        controller.transitionToRoute('schedules.view', controller.model);
+          controller.model.save().then(function() {
+            controller.transitionToRoute('schedules.view', controller.model);
+            resolve();
+          }, function(reason) {
+            reject(reason);
+          });
+        }, function(reason) {
+          reject(reason);
+        });
       });
     },
     cancel() {
