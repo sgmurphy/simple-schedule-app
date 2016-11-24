@@ -1,7 +1,9 @@
 <div class="page-header">
   <h1><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Settings</h1>
 </div>
-
+{{#each flashMessages.queue as |flash|}}
+  {{flash-message flash=flash}}
+{{/each}}
 <h2>Meeting Dates</h2>
 <form>
   <div class="form-group">
