@@ -5,5 +5,5 @@ import { belongsTo, hasMany } from 'ember-data/relationships';
 export default Model.extend({
   schedule: belongsTo('schedule'),
   date: attr(),
-  assignments: hasMany('assignment'),
+  assignments: hasMany('assignment', { cascadeDelete: true }),
 });

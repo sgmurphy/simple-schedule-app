@@ -28,5 +28,16 @@ export default Model.extend({
     } else {
       return `${this.get('assignmentFrequency')} weeks`;
     }
-  })
+  }),
+
+  deleteRecord: function() {
+    var self = this;
+
+    this.get('groups').forEach(function(item) {
+      item.get('people').removeObject(self);
+      item.save();
+    });
+
+    this._super(...arguments);
+  }
 });
