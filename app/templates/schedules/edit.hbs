@@ -21,6 +21,12 @@
       {{input type="date" class="form-control" id="end-date" value=model.endDate}}
     </div>
   </div>
+  <div class="row">
+    <div class="form-group col-md-12">
+      <label for="notes">Notes</label>
+      {{textarea rows=3 class="form-control" id="notes" value=model.notes}}
+    </div>
+  </div>
   <h2>Columns</h2>
   {{#each model.assignments as |assignment|}}
   <div class="row">
