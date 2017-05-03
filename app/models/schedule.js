@@ -7,7 +7,7 @@ export default Model.extend({
   name: attr('string'),
   startDate: attr({ defaultValue() { return moment().add(1, 'month').startOf('month').format('YYYY-MM-DD'); } }), // Wasn't working with attr('date')
   endDate: attr({ defaultValue() { return moment().add(1, 'month').endOf('month').format('YYYY-MM-DD'); } }), // Wasn't working with attr('date')
-  dates: hasMany('date'),
+  dates: hasMany('date', { cascadeDelete: true }),
   assignments: attr({ defaultValue() { return []; } }), // Might want to find a better name
   notes: attr('string')
 });
