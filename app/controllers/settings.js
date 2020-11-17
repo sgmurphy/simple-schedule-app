@@ -15,7 +15,7 @@ export default Ember.Controller.extend({
 
       this.model.save().then(function() {
         flashMessages.success('Settings saved!');
-      }).catch(function(reason) {
+    }).catch(function() {
         flashMessages.danger('There was an error processing your request. Please try again.');
       });
     },

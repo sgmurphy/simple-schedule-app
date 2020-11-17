@@ -73,7 +73,7 @@ export default Ember.Controller.extend({
     // Loop thru schedule dates
     controller.model.get('dates').forEach(function(date) {
       // Loop thru available assignments (schedule columns)
-      controller.model.get('assignments').forEach(function(availableAssignment, index, availableAssignments) {
+      controller.model.get('assignments').forEach(function(availableAssignment) {
         var group = controller.get('store').peekRecord('group', availableAssignment.group);
 
         var sortedPeople = group.get('people').sortBy('randomSeed').sortBy('lastAssignment', 'assignmentCount');
@@ -93,7 +93,7 @@ export default Ember.Controller.extend({
           }
 
           // Check if the person is unavailable
-          var unavailable = person.get('datesUnavailable').any(function(item, index, enumerable) {
+          var unavailable = person.get('datesUnavailable').any(function(item) {
             if (moment(item.date).isSame(date.get('date'))) {
               return true;
             }
