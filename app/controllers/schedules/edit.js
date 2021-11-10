@@ -1,7 +1,27 @@
-import Ember from 'ember';
+import Controller from '@ember/controller';
+import { Promise } from 'rsvp';
 import moment from 'moment';
 
-export default Ember.Controller.extend({
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
+export default Controller.extend({
   actions: {
     addAssignment() {
       this.model.get('assignments').pushObject({name: null, group: null});
@@ -16,7 +36,7 @@ export default Ember.Controller.extend({
     saveAndRebuild() {
       var controller = this;
 
-      return new Ember.RSVP.Promise(function(resolve, reject) {
+      return new Promise(function(resolve, reject) {
         // Delete current dates first
         controller.model.get('dates').invoke('destroyRecord');
 
@@ -48,7 +68,7 @@ export default Ember.Controller.extend({
       // Check if current date matches a meeting day
       if (date.day() === this.settings.get('midweekMeeting') || date.day() === this.settings.get('weekendMeeting')) {
         // Create a new date model and attach it to this schedule
-        this.get('store').createRecord('date', {
+        this.store.createRecord('date', {
           schedule: this.model,
           date: date.format('YYYY-MM-DD')
         }).save();
@@ -73,10 +93,23 @@ export default Ember.Controller.extend({
     // Loop thru schedule dates
     controller.model.get('dates').forEach(function(date) {
       // Loop thru available assignments (schedule columns)
-      controller.model.get('assignments').forEach(function(availableAssignment) {
-        var group = controller.get('store').peekRecord('group', availableAssignment.group);
+      var assignments = controller.model.get('assignments').map(function(assignment) {
+        assignment.sortedPeople = controller
+          .get('store')
+          .peekRecord('group', assignment.group)
+          .get('people')
+          .sortBy('randomSeed')
+          .sortBy('assignmentCount');
+        assignment.group_size = assignment.sortedPeople.length;
+        return assignment;
+      })
+      shuffle(assignments)
+      assignments.sort((a, b) => { return a.group_size - b.group_size; });
+      console.log(assignments.map(function(assignment) { return assignment.name; }));
 
-        var sortedPeople = group.get('people').sortBy('randomSeed').sortBy('lastAssignment', 'assignmentCount');
+      assignments.forEach(function(availableAssignment) {
+        var group = controller.get('store').peekRecord('group', availableAssignment.group);
+        var sortedPeople = availableAssignment.sortedPeople;
 
         console.log(sortedPeople.map(function(person) { return `${person.get('name')}:${person.get('assignmentCount')}`; }));
 

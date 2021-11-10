@@ -1,7 +1,7 @@
 <div class="page-header">
   <h1>
-    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Schedules
-    {{#link-to "schedules.edit" "new" class="btn btn-primary pull-right"}}Add Schedule{{/link-to}}
+    <i class="bi bi-calendar3"></i> Schedules
+    <LinkTo @route="schedules.edit" @model="new" class="btn btn-primary float-end">Add Schedule</LinkTo>
   </h1>
 </div>
 
@@ -22,10 +22,10 @@
       <td>{{moment-format schedule.startDate 'l'}} - {{moment-format schedule.endDate 'l'}}</td>
       <td>
       {{#each schedule.assignments as |assignment|}}
-        <span class="label label-default">{{assignment.name}}</span>
+        <span class="badge bg-secondary">{{assignment.name}}</span>
       {{/each}}
       </td>
-      <td class="text-right"><a {{action 'delete' schedule}} class="glyphicon glyphicon-trash" aria-hidden="true"></a></td>
+      <td class="text-right"><a {{action 'delete' schedule}} class="bi bi-trash" aria-hidden="true"></a></td>
     {{/link-to}}
   {{/each}}
   </tbody>

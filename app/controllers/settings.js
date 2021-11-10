@@ -1,9 +1,8 @@
-import Ember from 'ember';
+import Controller from '@ember/controller';
 
-export default Ember.Controller.extend({
-  flashMessages: Ember.inject.service(),
-  weekdays: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-  actions: {
+export default class extends Controller {
+  weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  actions = {
     changeMidweekMeeting(day) {
       this.model.set('midweekMeeting', day);
     },
@@ -11,16 +10,10 @@ export default Ember.Controller.extend({
       this.model.set('weekendMeeting', day);
     },
     save() {
-      var flashMessages = this.get('flashMessages');
-
-      this.model.save().then(function() {
-        flashMessages.success('Settings saved!');
-    }).catch(function() {
-        flashMessages.danger('There was an error processing your request. Please try again.');
-      });
+      this.model.save();
     },
     cancel() {
       window.history.back();
     }
-  }
-});
+  };
+}

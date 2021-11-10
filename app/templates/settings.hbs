@@ -1,29 +1,27 @@
 <div class="page-header">
-  <h1><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Settings</h1>
+  <h1><i class="bi bi-gear-fill"></i> Settings</h1>
 </div>
-{{#each flashMessages.queue as |flash|}}
-  {{flash-message flash=flash}}
-{{/each}}
 <h2>Meeting Dates</h2>
 <form>
-  <div class="form-group">
+  <div class="mb-3">
     <label for="midweek-meeting">Midweek meeting is on</label>
-    <select class="form-control" id="midweek-meeting" onchange={{action "changeMidweekMeeting" value="target.value"}}>
+    <select class="form-select" id="midweek-meeting" onchange={{action "changeMidweekMeeting" value="target.value"}}>
       {{#each weekdays as |day index|}}
         <option value="{{index}}" selected="{{if (eq model.midweekMeeting index) 'selected'}}">{{day}}</option>
       {{/each}}
     </select>
   </div>
 
-  <div class="form-group">
+  <div class="mb-3">
     <label for="weekend-meeting">Weekend meeting is on</label>
-    <select class="form-control" id="weekend-meeting" onchange={{action "changeWeekendMeeting" value="target.value"}}>
+    <select class="form-select" id="weekend-meeting" onchange={{action "changeWeekendMeeting" value="target.value"}}>
       {{#each weekdays as |day index|}}
         <option value="{{index}}" selected="{{if (eq model.weekendMeeting index) 'selected'}}">{{day}}</option>
       {{/each}}
     </select>
   </div>
-  <div class="form-group">
+
+  <div class="mb-3">
     <button {{action "save"}} type="submit" class="btn btn-primary">Save</button>
     <button {{action "cancel"}} type="button" class="btn btn-link">Cancel</button>
   </div>

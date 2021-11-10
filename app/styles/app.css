@@ -1,0 +1,14 @@
+h1 .glyphicon, h1 button {
+  vertical-align: bottom;
+}
+.table-hover tbody tr {
+  cursor: pointer;
+}
+
+/* Print styles */
+@media print {
+  .container {
+    max-width: 100%;
+  }
+}
+  

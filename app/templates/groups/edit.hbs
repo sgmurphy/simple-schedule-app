@@ -1,15 +1,16 @@
 <div class="page-header">
   <h1>
-    <span class="glyphicon glyphicon-tag" aria-hidden="true"></span> {{if model.isNew 'Add' 'Edit'}} Group
+    <i class="bi bi-tag-fill"></i> {{if model.isNew 'Add' 'Edit'}} Group
   </h1>
 </div>
 
 <form>
-  <div class="form-group">
+  <div class="mb-3">
     <label for="name">Name</label>
     {{input type="text" class="form-control" id="name" value=model.name}}
   </div>
-  <div class="form-group">
+
+  <div class="mb-3">
     <button {{action "save"}} type="submit" class="btn btn-primary">Save</button>
     <button {{action "cancel"}} type="button" class="btn btn-link">Cancel</button>
   </div>

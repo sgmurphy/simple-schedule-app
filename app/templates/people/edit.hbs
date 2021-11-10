@@ -1,29 +1,32 @@
 <div class="page-header">
   <h1>
-    <span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{if model.isNew 'Add' 'Edit'}} Person
+    <i class="bi bi-person-fill"></i> {{if model.isNew 'Add' 'Edit'}} Person
   </h1>
 </div>
 
 <form>
-  <div class="form-group">
+  <div class="mb-3">
     <label for="name">Name</label>
     {{input type="text" class="form-control" id="name" value=model.name}}
   </div>
-  <div class="form-group">
+  <div class="mb-3">
     <label for="email">Email</label>
     {{input type="email" class="form-control" id="email" value=model.email}}
   </div>
-  <div class="form-group">
+  <div class="mb-3">
     <label for="groups">Groups</label>
-    {{#x-select class="form-control" id="groups" multiple=true value=model.groups as |xs|}}
-    {{#each groups as |group|}}
-      {{#xs.option value=group}}{{group.name}}{{/xs.option}}
-    {{/each}}
-    {{/x-select}}
+    <PowerSelectMultiple class="form-select" id="groups"
+      @searchEnabled={{true}}
+      @options={{groups}}
+      @selected={{model.groups}}
+      @placeholder="Choose groups..."
+      @onChange={{fn (mut model.groups)}} as |group|>
+      {{group.name}}
+    </PowerSelectMultiple>
   </div>
-  <div class="form-group">
+  <div class="mb-3">
     <label for="assignment-frequency">Assignment frequency</label>
-    {{#x-select class="form-control" id="assignment-frequency" value=model.assignmentFrequency as |xs|}}
+    {{#x-select class="form-select" id="assignment-frequency" value=model.assignmentFrequency as |xs|}}
     {{#each assignmentFrequencies as |freq|}}
       {{#xs.option value=freq}}
         {{#if (eq freq 0)}}
@@ -34,21 +37,19 @@
       {{/xs.option}}
     {{/each}}
     {{/x-select}}
-    <span id="helpBlock" class="help-block">Set the minimum timespan between assignments for this person.</span>
+    <p><small>Set the minimum timespan between assignments for this person.</small></p>
   </div>
   <h2>Unavailable Dates</h2>
   {{#each model.datesUnavailable as |date|}}
-    <div class="form-group">
-      <div class="input-group">
-        {{input type="date" class="form-control" value=date.date}}
-        <div class="input-group-btn"><button type="button" {{action "deleteUnavailableDate" date}} class="btn btn-default"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></div>
-      </div>
+    <div class="input-group mb-3">
+      {{input type="date" class="form-control" value=date.date}}
+      <button type="button" {{action "deleteUnavailableDate" date}} class="btn btn-outline-secondary"><i class="bi-trash"></i></button>
     </div>
   {{/each}}
-  <div class="form-group">
-    <button {{action "addUnavailableDate"}} type="submit" class="btn btn-xs btn-primary">Add Date</button>
+  <div class="mb-3">
+    <button {{action "addUnavailableDate"}} type="submit" class="btn btn-secondary btn-sm">Add Date</button>
   </div>
-  <div class="form-group">
+  <div class="mb-3">
     <button {{action "save"}} type="submit" class="btn btn-primary">Save</button>
     <button {{action "cancel"}} type="button" class="btn btn-link">Cancel</button>
   </div>

@@ -1,9 +1,10 @@
-import Ember from 'ember';
-import config from './config/environment';
+import EmberRouter from '@ember/routing/router';
+import config from 'simple-schedule-app/config/environment';
 
-const Router = Ember.Router.extend({
-  location: config.locationType
-});
+export default class Router extends EmberRouter {
+  location = config.locationType;
+  rootURL = config.rootURL;
+}
 
 Router.map(function() {
   this.route('schedules', function() {
@@ -18,5 +19,3 @@ Router.map(function() {
   });
   this.route('settings');
 });
-
-export default Router;

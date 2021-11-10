@@ -1,9 +1,10 @@
 <div class="page-header">
   <h1>
-    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> {{model.name}}
-    <div class="pull-right">
-      {{#link-to "schedules.edit" model class="btn btn-default hidden-print"}}Edit Schedule{{/link-to}}
-      <button class="btn btn-primary hidden-print" {{action 'print'}} onclick="this.blur();">Print</button>
+    <i class="bi bi-calendar3"></i> {{model.name}}
+    <div class="float-end d-print-none">
+      <LinkTo @route="schedules.edit" @model={{model}} class="btn btn-secondary">Edit Schedule</LinkTo>
+      <a class="btn btn-secondary" href="{{model.mailto}}" role="button">Email</a>
+      <button class="btn btn-primary" {{action 'print'}} onclick="this.blur();">Print</button>
     </div>
   </h1>
 </div>

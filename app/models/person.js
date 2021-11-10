@@ -1,7 +1,5 @@
-import Ember from 'ember';
-import Model from 'ember-data/model';
-import attr from 'ember-data/attr';
-import { hasMany } from 'ember-data/relationships';
+import Model, { attr, hasMany } from '@ember-data/model';
+import { computed } from '@ember/object';
 
 export default Model.extend({
   name: attr('string'),
@@ -11,10 +9,10 @@ export default Model.extend({
   lastAssignment: attr(),
   assignmentCount: attr('number'), // used to even out schedules
   datesUnavailable: attr({ defaultValue() { return []; } }),
-  randomSeed: Ember.computed(function() {
+  get randomSeed() {
     return Math.random();
-  }).volatile(),
-  groupsSorted: Ember.computed.sort('groups', function(a, b){
+  },
+  groupsSorted: computed.sort('groups', function(a, b){
     if (a.get('name') > b.get('name')) {
       return 1;
     } else if (a.get('name') < b.get('name')) {
@@ -22,18 +20,18 @@ export default Model.extend({
     }
     return 0;
   }),
-  assignmentFrequencyPrintable: Ember.computed('assignmentFrequency', function() {
-    if (this.get('assignmentFrequency') === 0) {
+  assignmentFrequencyPrintable: computed('assignmentFrequency', function() {
+    if (this.assignmentFrequency === 0) {
       return 'As needed';
     } else {
-      return `${this.get('assignmentFrequency')} weeks`;
+      return `${this.assignmentFrequency} weeks`;
     }
   }),
 
   deleteRecord: function() {
     var self = this;
 
-    this.get('groups').forEach(function(item) {
+    this.groups.forEach(function(item) {
       item.get('people').removeObject(self);
       item.save();
     });

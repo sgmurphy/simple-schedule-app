@@ -1,7 +1,7 @@
 <div class="page-header">
   <h1>
-    <span class="glyphicon glyphicon-tag" aria-hidden="true"></span> Groups
-    {{#link-to "groups.edit" "new" class="btn btn-primary pull-right"}}Add Group{{/link-to}}
+    <i class="bi bi-tag-fill"></i> Groups
+    <LinkTo @route="groups.edit" @model="new" class="btn btn-primary float-end">Add Group</LinkTo>
   </h1>
 </div>
 
@@ -19,7 +19,7 @@
       {{#link-to "groups.edit" group tagName="tr"}}
         <td>{{group.name}}</td>
         <td>{{group.people.length}}</td>
-        <td class="text-right"><a {{action "delete" group}} class="glyphicon glyphicon-trash" aria-hidden="true"></a></td>
+        <td class="text-right"><a {{action "delete" group}} class="bi bi-trash"></a></td>
       {{/link-to}}
     {{/each}}
     </tbody>

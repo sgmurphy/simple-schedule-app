@@ -1,28 +1,28 @@
 <div class="page-header">
   <h1>
-    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> {{if model.isNew 'Add' 'Edit'}} Schedule
+    <i class="bi bi-calendar3"></i> {{if model.isNew 'Add' 'Edit'}} Schedule
   </h1>
 </div>
 
 <form>
   <div class="row">
-    <div class="form-group col-md-12">
+    <div class="mb-3 col-md-12">
       <label for="name">Name</label>
       {{input type="text" class="form-control" id="name" value=model.name}}
     </div>
   </div>
   <div class="row">
-    <div class="form-group col-md-6">
+    <div class="mb-3 col-md-6">
       <label for="start-date">Start date</label>
       {{input type="date" class="form-control" id="start-date" value=model.startDate}}
     </div>
-    <div class="form-group col-md-6">
+    <div class="mb-3 col-md-6">
       <label for="end-date">End date</label>
       {{input type="date" class="form-control" id="end-date" value=model.endDate}}
     </div>
   </div>
   <div class="row">
-    <div class="form-group col-md-12">
+    <div class="mb-3 col-md-12">
       <label for="notes">Notes</label>
       {{textarea rows=3 class="form-control" id="notes" value=model.notes}}
     </div>
@@ -30,11 +30,11 @@
   <h2>Columns</h2>
   {{#each model.assignments as |assignment|}}
   <div class="row">
-    <div class="form-group col-md-6">
+    <div class="mb-3 col-md-6">
       {{input type="text" class="form-control" value=assignment.name}}
     </div>
-    <div class="form-group col-md-6">
-      {{#x-select class="form-control" value=assignment.group as |xs|}}
+    <div class="mb-3 col-md-6">
+      {{#x-select class="form-select" value=assignment.group as |xs|}}
       {{#each groups as |group|}}
         {{#xs.option value=group.id}}{{group.name}}{{/xs.option}}
       {{/each}}
@@ -44,17 +44,17 @@
   </div>
   {{/each}}
   <div class="row">
-    <div class="form-group col-md-12">
-      <button {{action "addAssignment"}} type="submit" class="btn btn-xs btn-primary">Add Assignment</button>
+    <div class="mb-3 col-md-12">
+      <button {{action "addAssignment"}} type="submit" class="btn btn-sm btn-secondary">Add Assignment</button>
     </div>
   </div>
   <div class="row">
-    <div class="form-group col-md-12">
+    <div class="mb-3 col-md-12">
       {{#if model.isNew}}
         <button {{action "saveAndRebuild"}} type="submit" class="btn btn-primary">Save</button>
       {{else}}
         {{async-button action=(action "save") default="Save" pending="Saving..." class="btn btn-primary"}}
-        {{async-button action=(action "saveAndRebuild") default="Save & Rebuild" pending="Rebuilding..." class="btn btn-default"}}
+        {{async-button action=(action "saveAndRebuild") default="Save & Rebuild" pending="Rebuilding..." class="btn btn-secondary"}}
       {{/if}}
       <button {{action "cancel"}} type="button" class="btn btn-link">Cancel</button>
     </div>

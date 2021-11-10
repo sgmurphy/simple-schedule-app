@@ -1,10 +1,8 @@
-import resolver from './helpers/resolver';
-import './helpers/flash-message';
+import Application from 'simple-schedule-app/app';
+import config from 'simple-schedule-app/config/environment';
+import { setApplication } from '@ember/test-helpers';
+import { start } from 'ember-qunit';
 
-import registerSelectHelper from './helpers/register-select-helper';
-registerSelectHelper();
-import {
-  setResolver
-} from 'ember-qunit';
+setApplication(Application.create(config.APP));
 
-setResolver(resolver);
+start();

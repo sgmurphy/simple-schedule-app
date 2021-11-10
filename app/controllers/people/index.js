@@ -1,9 +1,9 @@
-import Ember from 'ember';
+import Controller from '@ember/controller';
 
-export default Ember.Controller.extend({
+export default Controller.extend({
   actions: {
     delete(person) {
-      this.get('model').removeObject(person);
+      this.model.removeObject(person);
       person.destroyRecord();
     }
   }

@@ -1,33 +1,26 @@
-<!-- Fixed navbar -->
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-expand-md navbar-dark bg-primary mb-5 d-print-none">
   <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      {{#link-to "index" class="navbar-brand"}}The Scheduler{{/link-to}}
+    <LinkTo @route="index" class="navbar-brand"><i class="bi bi-calendar-check"></i> Simple Schedule</LinkTo>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbar">
+      <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        <li class="nav-item">
+          <LinkTo @route="schedules" class="nav-link"><i class="bi bi-calendar3"></i> Schedules</LinkTo>
+        </li>
+        <li>
+          <LinkTo @route="people" class="nav-link"><i class="bi bi-people-fill"></i> People</LinkTo>
+        </li>
+        <li>
+          <LinkTo @route="groups" class="nav-link"><i class="bi bi-tag-fill"></i> Groups</LinkTo>
+        </li>
+        <li>
+          <LinkTo @route="settings" class="nav-link"><i class="bi bi-gear-fill"></i> Settings</LinkTo>
+        </li>
+      </ul>
     </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        {{#link-to "schedules" tagName="li" href=false}}
-          {{#link-to "schedules"}}<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Schedules{{/link-to}}
-        {{/link-to}}
-        {{#link-to "people" tagName="li" href=false}}
-          {{#link-to "people"}}<span class="glyphicon glyphicon-user" aria-hidden="true"></span> People{{/link-to}}
-        {{/link-to}}
-        {{#link-to "groups" tagName="li" href=false}}
-          {{#link-to "groups"}}<span class="glyphicon glyphicon-tag" aria-hidden="true"></span> Groups{{/link-to}}
-        {{/link-to}}
-        {{#link-to "settings" tagName="li" href=false}}
-          {{#link-to "settings"}}<span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Settings{{/link-to}}
-        {{/link-to}}
-      </ul>
-    </div><!--/.nav-collapse -->
   </div>
 </nav>
 
