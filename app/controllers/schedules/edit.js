@@ -21,8 +21,17 @@ function shuffle(array) {
   return array;
 }
 
-export default Controller.extend({
-  actions: {
+export default class extends Controller {
+  weekdays = [
+    { name: 'Sunday', value: 0},
+    { name: 'Monday', value: 1},
+    { name: 'Tuesday', value: 2},
+    { name: 'Wednesday', value: 3},
+    { name: 'Thursday', value: 4},
+    { name: 'Friday', value: 5},
+    { name: 'Saturday', value: 6}
+  ];
+  actions = {
     addAssignment() {
       this.model.get('assignments').pushObject({name: null, group: null});
     },
@@ -59,14 +68,15 @@ export default Controller.extend({
     cancel() {
       window.history.back();
     }
-  },
-  generateDates() {
+  };
+
+  generateDates = function() {
     var date = moment(this.model.get('startDate'));
+    let daysOfWeek = this.model.get('daysOfWeek').mapBy('value');
 
     // Loop through days between startDate and endDate
     while (date.isSameOrBefore(this.model.get('endDate'))) {
-      // Check if current date matches a meeting day
-      if (date.day() === this.settings.get('midweekMeeting') || date.day() === this.settings.get('weekendMeeting')) {
+      if (daysOfWeek.includes(date.day())) {
         // Create a new date model and attach it to this schedule
         this.store.createRecord('date', {
           schedule: this.model,
@@ -76,8 +86,9 @@ export default Controller.extend({
 
       date.add(1, 'days');
     }
-  },
-  generateAssignments() {
+  }
+
+  generateAssignments = function() {
     var controller = this;
 
     // TODO: Fix this hack. Resets lastAssignment dates for everyone so rebuilding
@@ -156,4 +167,4 @@ export default Controller.extend({
       });
     });
   }
-});
+}

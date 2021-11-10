@@ -23,6 +23,19 @@
   </div>
   <div class="row">
     <div class="mb-3 col-md-12">
+      <label for="days-of-week">Schedule assignments on</label>
+      <PowerSelectMultiple class="form-select" id="days-ofweek"
+        @searchEnabled={{true}}
+        @options={{weekdays}}
+        @selected={{model.daysOfWeek}}
+        @placeholder="Choose days..."
+        @onChange={{fn (mut model.daysOfWeek)}} as |day|>
+        {{day.name}}
+      </PowerSelectMultiple>
+    </div>
+  </div>
+  <div class="row">
+    <div class="mb-3 col-md-12">
       <label for="notes">Notes</label>
       {{textarea rows=3 class="form-control" id="notes" value=model.notes}}
     </div>

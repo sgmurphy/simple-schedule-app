@@ -5,10 +5,27 @@ import moment from 'moment';
 
 export default Model.extend({
   name: attr('string'),
-  startDate: attr({ defaultValue() { return moment().add(1, 'month').startOf('month').format('YYYY-MM-DD'); } }), // Wasn't working with attr('date')
-  endDate: attr({ defaultValue() { return moment().add(1, 'month').endOf('month').format('YYYY-MM-DD'); } }), // Wasn't working with attr('date')
+  startDate: attr({
+    defaultValue() {
+      return moment().add(1, 'month').startOf('month').format('YYYY-MM-DD');
+    }
+  }), // Wasn't working with attr('date')
+  endDate: attr({
+    defaultValue() {
+      return moment().add(1, 'month').endOf('month').format('YYYY-MM-DD');
+    }
+  }), // Wasn't working with attr('date')
+  daysOfWeek: attr({
+    defaultValue() {
+      return [];
+    }
+  }),
   dates: hasMany('date'),
-  assignments: attr({ defaultValue() { return []; } }), // Might want to find a better name
+  assignments: attr({
+    defaultValue() {
+      return [];
+    }
+  }), // Might want to find a better name
   notes: attr('string'),
   mailto: computed('dates.[]', 'name', 'startDate', 'endDate', function() {
     let people = [];
@@ -16,7 +33,7 @@ export default Model.extend({
     this.dates.forEach(function (date) {
       date.assignments.forEach(function (assignment) {
         resolve(assignment.person).then(function (person) {
-          console.log(person.name); 
+          console.log(person.name);
         });
         // people.pushObject());
       });
@@ -29,7 +46,7 @@ export default Model.extend({
     console.log(emails);
     return `mailto:${emails}?subject=${this.name} (${moment(this.startDate).format('YYYY/MM/DD')}-${moment(this.endDate).format('YYYY/MM/DD')})`;
   }),
-  
+
   deleteRecord: function() {
     this.dates.invoke('destroyRecord');
 
